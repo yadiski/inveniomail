@@ -10,8 +10,8 @@ import { ThemeProvider } from "@/components/theme-provicer";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Normal Human",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: "Invenio Mail - AI Assited Email CLient",
+  icons: [{ rel: "icon", url: "/favico.ico" }],
 };
 
 export default function RootLayout({
