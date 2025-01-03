@@ -75,7 +75,7 @@ const AskAI = ({ isCollapsed }: { isCollapsed: boolean }) => {
                         <div className='flex items-center gap-4'>
                             <SparklesIcon className='size-6 text-gray-500' />
                             <div>
-                                <p className='text-gray-900 dark:text-gray-100'>Ask AI anything about your emails</p>
+                                <p className='text-gray-900 dark:text-gray-100'>Ask Invenio Assist anything about your email</p>
                                 <p className='text-gray-500 text-xs dark:text-gray-400'>Get answers to your questions about your emails</p>
                             </div>
                         </div>
