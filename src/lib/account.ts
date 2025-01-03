@@ -27,7 +27,7 @@ class Account {
     }
 
     async createSubscription() {
-        const webhookUrl = process.env.NODE_ENV === 'development' ? 'https://potatoes-calculator-reports-crisis.trycloudflare.com' : process.env.NEXT_PUBLIC_URL
+        const webhookUrl = process.env.NODE_ENV === 'development' ? 'https://inveniomail.vercel.app' : process.env.NEXT_PUBLIC_URL
         const res = await axios.post('https://api.aurinko.io/v1/subscriptions',
             {
                 resource: '/email/messages',
@@ -51,14 +51,14 @@ class Account {
         })
         if (!account) throw new Error("Invalid token")
         if (!account.nextDeltaToken) throw new Error("No delta token")
-        let response = await this.getUpdatedEmails({ deltaToken: account.nextDeltaToken })
+        let response = await this.getUpdatedEmails({deltaToken: account.nextDeltaToken})
         let allEmails: EmailMessage[] = response.records
         let storedDeltaToken = account.nextDeltaToken
         if (response.nextDeltaToken) {
             storedDeltaToken = response.nextDeltaToken
         }
         while (response.nextPageToken) {
-            response = await this.getUpdatedEmails({ pageToken: response.nextPageToken });
+            response = await this.getUpdatedEmails({pageToken: response.nextPageToken});
             allEmails = allEmails.concat(response.records);
             if (response.nextDeltaToken) {
                 storedDeltaToken = response.nextDeltaToken
@@ -83,6 +83,11 @@ class Account {
                 nextDeltaToken: storedDeltaToken,
             }
         })
+        return {
+            emails: allEmails,
+            deltaToken: storedDeltaToken
+
+    }
     }
 
     async getUpdatedEmails({ deltaToken, pageToken }: { deltaToken?: string, pageToken?: string }): Promise<SyncUpdatedResponse> {
